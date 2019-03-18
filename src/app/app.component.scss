@@ -1,0 +1,28 @@
+@import "../style/variables";
+
+.header {
+  margin: 0;
+  text-transform: capitalize;
+  background-color: $dark-blue;
+  background-size: 200% 200%;
+  background-image: linear-gradient(45deg, $dark-blue, $cyan, $dark-blue);
+  color: white;
+  padding: $margin;
+  position: relative;
+  box-shadow: $shadow;
+  animation: background-rotation 5s infinite linear alternate;
+
+  .title {
+    font-size: 26px;
+    text-transform: uppercase;
+    margin-left: 10%;
+    display: inline-block;
+    width: 90%;
+    text-align: center;
+  }
+}
+
+@keyframes background-rotation {
+  0% {background-position: 0 0}
+  100% {background-position: 100% 100%}
+}

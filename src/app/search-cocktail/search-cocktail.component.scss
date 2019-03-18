@@ -1,0 +1,16 @@
+@import "../../style/variables";
+
+.container {
+  width: 80%;
+  margin: $margin 10%;
+}
+
+.radio {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: space-around;
+
+  &>* {
+    width: 250px;
+  }
+}
