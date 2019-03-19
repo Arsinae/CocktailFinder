@@ -47,4 +47,50 @@ export class CocktailService {
       return categories;
     });
   }
+
+  getCocktailByIngredient(ingredient: string): Promise<Array<any>> {
+    return this.http.get('https://www.thecocktaildb.com/api/json/v1/1/filter.php', {
+      params: {i: ingredient}
+    }).toPromise().then(res => {
+      if (res['drinks']) {
+        return res['drinks'];
+      } else {
+        return [];
+      }
+    });
+  }
+
+  alreadyPresent(related: Array<{id: string, name: string, image: string, ref: number}>, id) {
+    for (let i = 0; i < related.length; i++) {
+      if (related[i].id === id) {
+        return i;
+      }
+    }
+    return -1;
+  }
+
+  async getRelatedCocktails(cocktail: Cocktail) {
+    const related: Array<{id: string, name: string, image: string, ref: number}> = [];
+    for (const ingredient of cocktail.ingredients) {
+      await this.getCocktailByIngredient(ingredient.name).then(cocktailsFound => {
+        for (const cocktailFound of cocktailsFound) {
+          const present = this.alreadyPresent(related, cocktailFound.idDrink);
+          if (present === -1) {
+            related.push({
+              id: cocktailFound.idDrink,
+              name: cocktailFound.strDrink,
+              image: cocktailFound.strDrinkThumb,
+              ref: 1
+            });
+          } else {
+            related[present].ref += 1;
+          }
+        }
+      });
+    }
+    related.sort(function(a, b) {
+      return b.ref - a.ref;
+    });
+    return related;
+  }
 }

@@ -10,6 +10,7 @@ import { Cocktail } from '../cocktail/cocktail';
 export class LookupComponent implements OnInit {
 
   public cocktail: Cocktail;
+  public related: Array<{id: string, name: string, image: string, ref: number}> = [];
 
   constructor(private route: ActivatedRoute, private cocktailService: CocktailService) { }
 
@@ -17,6 +18,9 @@ export class LookupComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.cocktailService.getCocktail(params.id).then(res => {
         this.cocktail = res;
+        this.cocktailService.getRelatedCocktails(this.cocktail).then(related => {
+          console.log(related);
+        });
       });
     });
   }
