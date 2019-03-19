@@ -10,8 +10,9 @@ import { ListElementDirective } from 'roleden-component';
 export class SearchCocktailComponent implements OnInit {
 
   public search = '';
-  public cocktailList: Array<ListElementDirective> = [];
+  public cocktailList = [];
 
+  public advanced = false;
   public categoriesList: Array<string> = [];
   public chosenCategory = '';
 
@@ -32,25 +33,42 @@ export class SearchCocktailComponent implements OnInit {
       this.searchCocktail();
     }
   }
+
   searchCocktail() {
     this.searchService.getCocktailByName(this.search).then(res => {
       console.log(res);
-      this.cocktailList = [];
-      if (res && res['drinks']) {
-        for (const drink of res['drinks']) {
-          this.cocktailList.push({
-            title: drink.strDrink,
-            author: drink.strCategory,
-            color: 'blue',
-            file: drink.idDrink,
-            icon: 'fas fa-glass-martini-alt'
-          });
-        }
-      }
+      this.cocktailList = res;
     });
   }
 
   chooseCategory(choose) {
-    console.log(choose);
+    if (choose !== this.chosenCategory) {
+      this.chosenCategory = choose;
+    }
+  }
+
+  getMatchingName() {
+    const search = this.search.toLowerCase();
+    const matchingCocktail = [];
+    for (const drink of this.cocktailList) {
+      if (this.matchingCategory(drink)) {
+        matchingCocktail.push({
+          title: drink.strDrink,
+          author: drink.strCategory,
+          color: 'blue',
+          file: drink.idDrink,
+          icon: 'fas fa-glass-martini-alt'
+        });
+      }
+    }
+    return matchingCocktail;
+  }
+
+  matchingCategory(drink): boolean {
+    if (drink.strCategory.match(this.chosenCategory)) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

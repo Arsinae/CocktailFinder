@@ -5,12 +5,21 @@
   margin: $margin 10%;
 }
 
-.radio {
-  display: flex;
-  flex-wrap: wrap;
-  align-content: space-around;
+.searchInput {
+  margin: $margin;
+}
 
-  &>* {
-    width: 250px;
+.advancedSearch {
+  margin: $margin;
+
+  .radio {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: space-around;
+
+    &>* {
+      width: 250px;
+    }
   }
 }

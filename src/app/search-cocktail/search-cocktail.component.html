@@ -6,12 +6,21 @@
   </div>
 
   <div class="advancedSearch" *ngIf="categoriesList.length > 0">
-    <rd-radio-button [color]="'blue'" [(value)]="chosenCategory" (valueChange)="chooseCategory($event)">
-      <rd-radio-button-option *ngFor="let category of categoriesList" [value]="category">{{category}}</rd-radio-button-option>
-    </rd-radio-button>
+    <rd-button (buttonClick)="advanced = !advanced" [color]="'blue'">
+      Filtres
+    </rd-button>
+    <div *ngIf="advanced">
+      <rd-radio-button [color]="'blue'" (valueChange)="chooseCategory($event)">
+        <div class="radio">
+        <rd-radio-button-option *ngFor="let category of categoriesList" [value]="category">
+          {{category}}
+          </rd-radio-button-option>
+        </div>
+      </rd-radio-button>
+    </div>
   </div>
 
   <div class="results">
-   <rd-list [data]="cocktailList"></rd-list>
+   <rd-list [data]="getMatchingName()"></rd-list>
   </div>
 </div>

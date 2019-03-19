@@ -12,7 +12,13 @@ export class CocktailService {
   getCocktailByName(name: string): Promise<any> {
     return this.http.get('https://www.thecocktaildb.com/api/json/v1/1/search.php', {
       params: {s: name}
-    }).toPromise();
+    }).toPromise().then(res => {
+      if (res['drinks']) {
+        return res['drinks'];
+      } else {
+        return [];
+      }
+    });
   }
 
   getCategoryList(): Promise<Array<string>> {
