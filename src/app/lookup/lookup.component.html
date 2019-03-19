@@ -1,3 +1,23 @@
-<p>
-  lookup works!
-</p>
+<div class="cocktail" *ngIf="cocktail">
+  <div class="image">
+    <img [src]="cocktail.image">
+  </div>
+  <div class="infos">
+    <div class="name">{{cocktail.name}}</div>
+    <div class="ingredients">
+      <table>
+        <tr>
+          <th>Ingredients</th>
+          <th>Quantité</th>
+        </tr>
+        <tr *ngFor="let ingredient of cocktail.ingredients">
+          <td>{{ingredient.name}}</td>
+          <td>{{ingredient.measure}}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+<div class="related">
+  <div class="name">Cocktails associés</div>
+</div>

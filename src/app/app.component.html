@@ -2,6 +2,6 @@
   <div class="title">Cocktail Finder</div>
 </div>
 
-<div [@routerAnimation]="routeAnimation('a')">
-  <router-outlet></router-outlet>
+<div [@routerAnimation]="routeAnimation(routerOutlet)">
+  <router-outlet #routerOutlet="outlet"></router-outlet>
 </div>

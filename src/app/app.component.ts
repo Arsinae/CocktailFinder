@@ -25,6 +25,6 @@ export class AppComponent {
   title = 'CocktailFinder';
 
   routeAnimation(outlet: RouterOutlet) {
-    return outlet;
+    return outlet.activatedRouteData['animation'];
   }
 }

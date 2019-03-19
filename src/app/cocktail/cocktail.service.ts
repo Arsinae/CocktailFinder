@@ -26,6 +26,16 @@ export class CocktailService {
     });
   }
 
+  getCocktail(id: string): Promise<Cocktail> {
+    return this.http.get('https://www.thecocktaildb.com/api/json/v1/1/lookup.php', {
+      params: {i: id}
+    }).toPromise().then(res => {
+      if (res['drinks'] && res['drinks'].length > 0) {
+        return new Cocktail(res['drinks'][0]);
+      }
+    });
+  }
+
   getCategoryList(): Promise<Array<string>> {
     return this.http.get('https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list').toPromise().then(res => {
       const categories = [];
