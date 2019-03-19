@@ -1,5 +1,7 @@
-import { CocktailService } from './../cocktail/cocktail.service';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { CocktailService } from './../cocktail/cocktail.service';
+import { Cocktail } from '../cocktail/cocktail';
 import { ListElementDirective } from 'roleden-component';
 
 @Component({
@@ -10,13 +12,13 @@ import { ListElementDirective } from 'roleden-component';
 export class SearchCocktailComponent implements OnInit {
 
   public search = '';
-  public cocktailList = [];
+  public cocktailList: Array<Cocktail> = [];
 
   public advanced = false;
   public categoriesList: Array<string> = [];
   public chosenCategory = '';
 
-  constructor(private searchService: CocktailService) { }
+  constructor(private searchService: CocktailService, private router: Router) { }
 
   ngOnInit() {
     this.loadCategory();
@@ -35,8 +37,7 @@ export class SearchCocktailComponent implements OnInit {
   }
 
   searchCocktail() {
-    this.searchService.getCocktailByName(this.search).then(res => {
-      console.log(res);
+    this.searchService.getCocktailsByName(this.search).then(res => {
       this.cocktailList = res;
     });
   }
@@ -47,16 +48,15 @@ export class SearchCocktailComponent implements OnInit {
     }
   }
 
-  getMatchingName() {
-    const search = this.search.toLowerCase();
+  getMatchingList() {
     const matchingCocktail = [];
     for (const drink of this.cocktailList) {
       if (this.matchingCategory(drink)) {
         matchingCocktail.push({
-          title: drink.strDrink,
-          author: drink.strCategory,
+          title: drink.name,
+          author: drink.category,
           color: 'blue',
-          file: drink.idDrink,
+          file: drink.id,
           icon: 'fas fa-glass-martini-alt'
         });
       }
@@ -64,11 +64,15 @@ export class SearchCocktailComponent implements OnInit {
     return matchingCocktail;
   }
 
-  matchingCategory(drink): boolean {
-    if (drink.strCategory.match(this.chosenCategory)) {
+  matchingCategory(drink: Cocktail): boolean {
+    if (drink.category.match(this.chosenCategory)) {
       return true;
     } else {
       return false;
     }
+  }
+
+  navigateToCocktail(cocktailId) {
+    this.router.navigate(['/lookup', cocktailId]);
   }
 }

@@ -21,6 +21,6 @@
   </div>
 
   <div class="results">
-   <rd-list [data]="getMatchingName()"></rd-list>
+   <rd-list [data]="getMatchingList()" (fileSelect)="navigateToCocktail($event)"></rd-list>
   </div>
 </div>

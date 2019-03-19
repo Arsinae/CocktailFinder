@@ -19,7 +19,7 @@
     align-content: space-around;
 
     &>* {
-      width: 250px;
+      padding: $margin/2;
     }
   }
 }

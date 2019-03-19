@@ -1,3 +1,4 @@
+import { Cocktail } from './cocktail';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -9,12 +10,16 @@ export class CocktailService {
 
   constructor(private http: HttpClient) { }
 
-  getCocktailByName(name: string): Promise<any> {
+  getCocktailsByName(name: string): Promise<Array<Cocktail>> {
     return this.http.get('https://www.thecocktaildb.com/api/json/v1/1/search.php', {
       params: {s: name}
     }).toPromise().then(res => {
       if (res['drinks']) {
-        return res['drinks'];
+        const drinks = [];
+        for (const drink of res['drinks']) {
+          drinks.push(new Cocktail(drink));
+        }
+        return drinks;
       } else {
         return [];
       }
