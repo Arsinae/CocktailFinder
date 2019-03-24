@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CocktailService } from './../cocktail/cocktail.service';
 import { Cocktail } from '../cocktail/cocktail';
 @Component({
@@ -12,17 +12,21 @@ export class LookupComponent implements OnInit {
   public cocktail: Cocktail;
   public related: Array<{id: string, name: string, image: string, ref: number}> = [];
 
-  constructor(private route: ActivatedRoute, private cocktailService: CocktailService) { }
+  constructor(private route: ActivatedRoute, private cocktailService: CocktailService,
+    private router: Router) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.cocktailService.getCocktail(params.id).then(res => {
         this.cocktail = res;
         this.cocktailService.getRelatedCocktails(this.cocktail).then(related => {
-          console.log(related);
+          this.related = related;
         });
       });
     });
   }
 
+  navigateToCocktail(cocktailId) {
+    this.router.navigate(['/lookup', cocktailId]);
+  }
 }

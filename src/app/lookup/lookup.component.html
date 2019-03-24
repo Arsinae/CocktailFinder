@@ -20,4 +20,11 @@
 </div>
 <div class="related">
   <div class="name">Cocktails associés</div>
+  <div class="relatedList">
+    <div class="cocktailCard" *ngFor="let cocktail of related">
+      <app-cocktail-card [name]="cocktail.name" [image]="cocktail.image" [id]="cocktail.id"
+      (click)="navigateToCocktail(cocktail.id)">
+      </app-cocktail-card>
+     </div>
+  </div>
 </div>

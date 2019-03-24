@@ -52,13 +52,7 @@ export class SearchCocktailComponent implements OnInit {
     const matchingCocktail = [];
     for (const drink of this.cocktailList) {
       if (this.matchingCategory(drink)) {
-        matchingCocktail.push({
-          title: drink.name,
-          author: drink.category,
-          color: 'blue',
-          file: drink.id,
-          icon: 'fas fa-glass-martini-alt'
-        });
+        matchingCocktail.push(drink);
       }
     }
     return matchingCocktail;

@@ -74,16 +74,18 @@ export class CocktailService {
     for (const ingredient of cocktail.ingredients) {
       await this.getCocktailByIngredient(ingredient.name).then(cocktailsFound => {
         for (const cocktailFound of cocktailsFound) {
-          const present = this.alreadyPresent(related, cocktailFound.idDrink);
-          if (present === -1) {
-            related.push({
-              id: cocktailFound.idDrink,
-              name: cocktailFound.strDrink,
-              image: cocktailFound.strDrinkThumb,
-              ref: 1
-            });
-          } else {
-            related[present].ref += 1;
+          if (cocktail.id !== cocktailFound.idDrink) {
+            const present = this.alreadyPresent(related, cocktailFound.idDrink);
+            if (present === -1) {
+              related.push({
+                id: cocktailFound.idDrink,
+                name: cocktailFound.strDrink,
+                image: cocktailFound.strDrinkThumb,
+                ref: 1
+              });
+            } else {
+              related[present].ref += 1;
+            }
           }
         }
       });

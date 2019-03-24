@@ -38,6 +38,20 @@
 }
 
 .related {
+  .relatedList {
+    display: flex;
+    flex-wrap: wrap;
+    overflow: hidden;
+    justify-content: center;
+    align-content: space-around;
+
+    &>* {
+      width: 200px;
+      box-sizing: border-box;
+      margin: $margin;
+      cursor: pointer;
+    }
+  }
 }
 
 .related, .cocktail {

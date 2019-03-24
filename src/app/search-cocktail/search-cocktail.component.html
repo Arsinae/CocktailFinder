@@ -21,6 +21,10 @@
   </div>
 
   <div class="results">
-   <rd-list [data]="getMatchingList()" (fileSelect)="navigateToCocktail($event)"></rd-list>
+   <div class="cocktailCard" *ngFor="let cocktail of getMatchingList()">
+    <app-cocktail-card [name]="cocktail.name" [image]="cocktail.image" [id]="cocktail.id"
+    (click)="navigateToCocktail(cocktail.id)">
+    </app-cocktail-card>
+   </div>
   </div>
 </div>

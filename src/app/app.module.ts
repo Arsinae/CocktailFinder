@@ -9,12 +9,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SearchCocktailComponent } from './search-cocktail/search-cocktail.component';
 import { LookupComponent } from './lookup/lookup.component';
+import { CocktailCardComponent } from './cocktail-card/cocktail-card.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SearchCocktailComponent,
-    LookupComponent
+    LookupComponent,
+    CocktailCardComponent
   ],
   imports: [
     BrowserModule,
