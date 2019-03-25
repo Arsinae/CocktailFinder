@@ -52,7 +52,7 @@ export class CocktailService {
     return this.http.get('https://www.thecocktaildb.com/api/json/v1/1/filter.php', {
       params: {i: ingredient}
     }).toPromise().then(res => {
-      if (res['drinks']) {
+      if (res && res['drinks']) {
         return res['drinks'];
       } else {
         return [];
