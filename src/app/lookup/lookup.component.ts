@@ -12,7 +12,12 @@ export class LookupComponent implements OnInit {
 
   public cocktail: Cocktail;
   public related: Array<{id: string, name: string, image: string, ref: number}> = [];
-  public calories = 0;
+  public nutrition:
+    {calorie: number, cholesterol: number, potassium: number, saturatedFat: number, sodium: number, sugar: number, protein: number}
+    = {calorie: 0, cholesterol: 0, potassium: 0, saturatedFat: 0, sodium: 0, sugar: 0, protein: 0};
+  public dailyValue:
+    {calorie: number, cholesterol: number, potassium: number, saturatedFat: number, sodium: number, sugar: number, protein: number}
+    = {calorie: 2500, cholesterol: 3, potassium: 4.7, saturatedFat: 20, sodium: 2.3, sugar: 100, protein: 50};
 
   constructor(private route: ActivatedRoute, private cocktailService: CocktailService,
     private router: Router, private nutritional: NutritionalService) { }
@@ -25,12 +30,16 @@ export class LookupComponent implements OnInit {
           this.related = related;
         });
         this.nutritional.getNutrientsInfo(this.cocktail.ingredients).then(nutrients => {
-          console.log(nutrients);
           if (nutrients['foods']) {
             for (const nutrient of nutrients['foods']) {
-              this.calories += nutrient['nf_calories'];
+              this.nutrition.calorie += nutrient['nf_calories'];
+              this.nutrition.cholesterol += nutrient['nf_cholesterol'];
+              this.nutrition.potassium += nutrient['nf_potassium'];
+              this.nutrition.saturatedFat += nutrient['nf_saturated_fat'];
+              this.nutrition.sodium += nutrient['nf_sodium'];
+              this.nutrition.sugar += nutrient['nf_sugars'];
+              this.nutrition.protein += nutrient['nf_protein'];
             }
-            console.log(this.calories);
           }
         });
       });

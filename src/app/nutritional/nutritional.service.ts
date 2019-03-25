@@ -16,7 +16,11 @@ export class NutritionalService {
         'x-app-key': '56b779b1cf17c0987cf542961cdf06b8'
       })
     };
-    const body = {query: '1 pint rum 2 L Mountain Dew'};
+    let query = '';
+    for (let i = 0; i < ingredients.length; i++) {
+      query += ingredients[i].measure + ' ' + ingredients[i].name + ' ';
+    }
+    const body = {query: query};
     return this.http.post('https://trackapi.nutritionix.com/v2/natural/nutrients', body, httpOptions)
     .toPromise();
   }
