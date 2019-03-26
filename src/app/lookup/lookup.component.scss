@@ -60,6 +60,7 @@
     font-size: 18px;
     position: relative;
     margin-left: 10%;
+    margin-bottom: 9px;
 
     &:after {
       content: '';
@@ -67,8 +68,21 @@
       height: 3px;
       background-color: $dark-blue;
       position: absolute;
-      bottom: -$margin / 2;
+      bottom: -$margin*1.5;
       left: 0;
+    }
+
+    &>.type {
+      float: right;
+      margin-right: 5%;
+      padding: $margin/3 $margin*1.5;
+      border-radius: 15px / 50%;
+      color: white;
+      background-color: $colored-blue;
+
+      &.alcohol {
+        background-color: $colored-red;
+      }
     }
   }
 }

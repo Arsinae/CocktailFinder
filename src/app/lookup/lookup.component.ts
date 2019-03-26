@@ -17,7 +17,7 @@ export class LookupComponent implements OnInit {
     = {calorie: 0, cholesterol: 0, potassium: 0, saturatedFat: 0, sodium: 0, sugar: 0, protein: 0};
   public dailyValue:
     {calorie: number, cholesterol: number, potassium: number, saturatedFat: number, sodium: number, sugar: number, protein: number}
-    = {calorie: 2500, cholesterol: 3, potassium: 4.7, saturatedFat: 20, sodium: 2.3, sugar: 100, protein: 50};
+    = {calorie: 2500, cholesterol: 300, potassium: 4700, saturatedFat: 20, sodium: 2300, sugar: 100, protein: 50};
 
   constructor(private route: ActivatedRoute, private cocktailService: CocktailService,
     private router: Router, private nutritional: NutritionalService) { }

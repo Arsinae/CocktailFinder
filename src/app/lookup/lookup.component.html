@@ -3,7 +3,9 @@
     <img [src]="cocktail.image">
   </div>
   <div class="infos">
-    <div class="name">{{cocktail.name}}</div>
+    <div class="name">{{cocktail.name}}
+      <span class="type" [class.alcohol]="cocktail.alcohol">{{cocktail.alcohol ? 'Alcohol': 'Alcohol Free'}}</span>
+    </div>
     <div class="ingredients">
       <table>
         <tr>
