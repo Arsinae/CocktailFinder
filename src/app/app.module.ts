@@ -3,7 +3,7 @@ import {BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 
-import { RoledenComponentModule } from 'roleden-component';
+import { InputModule, RadioButtonModule, ButtonModule } from 'roleden-component';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -23,7 +23,7 @@ import { CocktailCardComponent } from './cocktail-card/cocktail-card.component';
     BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
-    RoledenComponentModule
+    InputModule, RadioButtonModule, ButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

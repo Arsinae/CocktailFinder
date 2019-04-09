@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CocktailService } from './../cocktail/cocktail.service';
 import { Cocktail } from '../cocktail/cocktail';
-import { ListElementDirective } from 'roleden-component';
 
 @Component({
   selector: 'app-search-cocktail',
